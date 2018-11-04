@@ -99,15 +99,42 @@ public class BinarySearchTree
 
     }
 
+//    public void Delete(Node root,Node parent)
+//    {
+//        Node node,node1;
+//        if (root.getLeft()==null)
+//            node=root.getRight();
+//        else if (root.getRight()==null)
+//            node=root.getLeft();
+//        else
+//        {
+//            node1=root;
+//            node=root.getLeft();
+//            while(node.getRight()!=null)
+//            {
+//                node1=node;
+//                node=node.getRight();
+//            }
+//            if (node1==root)
+//                node1.setLeft(node.getLeft());
+//            else
+//                node1.setRight(node.getLeft());
+//            root.setData(node.getData());
+//            return;
+//        }
+//        if (root==parent) this.root = node;
+//        else if (parent.getLeft()==root) parent.setLeft(node);
+//        else parent.setRight(node);
+//        return;
+//    }
+
+
     public void Delete(Node root,Node parent)
     {
         Node node,node1;
-        if (root.getLeft()==null)
-            node=root.getRight();
-        else if (root.getRight()==null)
-            node=root.getLeft();
-        else
-        {
+       if (root.getLeft()!=null)
+       {
+
             node1=root;
             node=root.getLeft();
             while(node.getRight()!=null)
@@ -122,9 +149,24 @@ public class BinarySearchTree
             root.setData(node.getData());
             return;
         }
-        if (root==parent) this.root = node;
-        else if (parent.getLeft()==root) parent.setLeft(node);
-        else parent.setRight(node);
-        return;
+        else if (root.getRight()!=null)
+       {
+           node1=root;
+           node=root.getRight();
+           while(node.getLeft()!=null)
+           {
+               node1=node;
+               node=node.getLeft();
+           }
+           if (node1==root)
+               node1.setRight(node.getRight());
+           else
+               node1.setLeft(node.getRight());
+           root.setData(node.getData());
+           return;
+       }
+       else if (root==parent) this.root=null;
+       else if (root==parent.getRight()) parent.setRight(null);
+       else parent.setLeft(null);
     }
 }
